@@ -29,9 +29,9 @@ module Datadog::Notifications::Plugins
 
       reporter.batch do
         reporter.increment metric_name, tags: tags
-        reporter.timing "#{metric_name}.time", event.duration, tags: tags
-        reporter.timing "#{metric_name}.time.db", payload[:db_runtime].round(2), tags: tags
-        reporter.timing "#{metric_name}.time.view", payload[:view_runtime].round(2), tags: tags
+        reporter.timing("#{metric_name}.time", event.duration, tags: tags)
+        reporter.timing("#{metric_name}.time.db", payload[:db_runtime].round(2), tags: tags) if payload[:db_runtime]
+        reporter.timing("#{metric_name}.time.view", payload[:view_runtime].round(2), tags: tags) if payload[:view_runtime]
       end
     end
 
